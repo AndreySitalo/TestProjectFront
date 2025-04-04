@@ -6,9 +6,14 @@ const axiosInstance = axios.create({
 })
 
 
-export const GetProducts = async (dispatch) => {
+export const GetProducts = async (dispatch,code,productName) => {
     try {
-        const {data} = await axiosInstance.get('/GetAll');
+        const {data} = await axiosInstance.get('/GetAll',{
+            params: {
+              CodeFilter: code,
+              ValueFilter:productName
+            }
+          });
         console.log(data);
         dispatch(ActionCreators.setProducts(data));
 
